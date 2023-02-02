@@ -134,6 +134,7 @@ answering this:
 3.  Excluding `pf_score`, select two other numeric variables (hint: look
     for `<dbl>` or `<int>` designations) and describe their relationship
     with each other using an appropriate visualization.
+    
 
 ## Task 4: Pairwise relationships
 

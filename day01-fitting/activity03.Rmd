@@ -1,8 +1,76 @@
 ---
-title: "Activity 2 - Day 1"
+title: "Activity 3 - Day 1"
 output: github_document
 ---
 
-```{setup, include=FALSE}
+
+# Day 1
+
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidymodels)
+library(GGally)
 ```
+
+```{r data, include=FALSE}
+hfi <- readr::read_csv("https://www.openintro.org/data/csv/hfi.csv")
+```
+
+## Task 3: Load the data
+
+This is an observational study.
+
+```{r histogram}
+pf_hist<-ggplot(data = hfi, aes(x = pf_score)) +
+  geom_histogram(binwidth = 0.25) +
+  xlab("pf_score")
+```
+
+The distribution is skewed to the right, meaning that the majority of countries have a high pf_score. There are 3 peaks. This is not what I expected to see, since I figured it would be normally distributed.
+
+## Year and homicide rates in Mexico
+```{r year_homicide}
+hfi_mex <-hfi %>% filter(countries=="Mexico")
+year_homicide_mex <- ggplot(hfi_mex) + 
+    geom_bar(aes(x = year, y = pf_ss_homicide), stat = 'identity')
+```
+The homicide rate appears to be decreasing.
+
+## Task 4: Pairwise relationships
+
+$$
+\texttt{pf\\_score} = \beta_0 + \beta_1 \times \texttt{pf\\_expression\\_control} + \varepsilon
+$$
+#Come back to questions
+
+```{r pair_scores}
+hfi %>% 
+  select(ends_with("_score")) %>% 
+  ggpairs()
+```
+
+$$
+\texttt{pf\\_score} = \beta_0 + \beta_1 \times \texttt{hf\\_score} + \beta_2 \times \texttt{ef\\_score} + \varepsilon
+$$
+```{r mult_lin_model}
+m_hr_ef <- lm(pf_score ~ hf_score + ef_score, data = hfi)
+  tidy(m_hr_ef)
+```
+
+$$
+\hat{y} = 2 \times \texttt{hf\\_score} - \texttt{ef\\_score}
+$$
+Come back for question
+
+# Day 2
+
+```{r}
+
+```
+
+
+
+
+
+
